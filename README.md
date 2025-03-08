@@ -1,15 +1,20 @@
-# JetXBot 🤖
+# 🤖 TradingPro Bot - Documentation
 
-## Description
-Un bot Telegram intelligent pour réduire les pertes sur JetX.
+## Fonctionnalités Clés
+- 🎯 Prédictions en temps réel avec modèles hybrides (ML + LSTM)
+- 💰 Support multi-devises (€/$/£/¥)
+- 📊 Dashboard personnalisé avec Grafana
+- 🔒 Vérification des seuils de sécurité
+- 📈 Analyse technique automatique
 
-## Fonctionnalités
-- Prédictions avec 87% de précision
-- Gestion des risques en temps réel
-- Base de données sécurisée
+## Déploiement Rapide
 
-## Installation
-1. Clonez le dépôt :
-   ```bash
-   git clone https://github.com/arthilio/Jet-X-PRO-Bot.git
-   cd Jet-X-PRO-BOT
+```bash
+# 1. Cloner le dépôt
+git clone https://github.com/votreuser/trading-bot
+
+# 2. Configurer l'environnement
+cp config/.env.example .env
+
+# 3. Démarrer les services
+docker-compose up --build -d
