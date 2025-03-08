@@ -1,0 +1,32 @@
+name: CI/CD Pipeline
+on: [push, pull_request]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    - run: pip install -r requirements.txt
+    - run: pytest tests/
+
+  deploy-prod:
+    needs: [build-test]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: render-oss/deploy-render@v1
+      with:
+        service-id: ${{ secrets.RENDER_SERVICE_ID }}
+        api-key: ${{ secrets.RENDER_API_KEY }}
