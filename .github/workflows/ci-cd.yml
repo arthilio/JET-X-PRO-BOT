@@ -8,9 +8,13 @@ jobs:
       postgres:
         image: postgres:13
         env:
+          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test_db
         ports:
           - 5432:5432
+    env:
+      DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/test_db"
 
     steps:
     - uses: actions/checkout@v3
@@ -19,6 +23,7 @@ jobs:
       with:
         python-version: '3.10'
     - run: pip install -r requirements.txt
+    - run: pip install pytest
     - run: pytest tests/
 
   deploy-prod:
