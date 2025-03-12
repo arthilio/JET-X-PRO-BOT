@@ -25,7 +25,7 @@ jobs:
       run: |
         pip install --upgrade pip
         pip install -r requirements.txt
-        pip list  # Affiche les packages installés pour le debug
+        pip list  # Affiche les packages installés pour debug
 
     - name: Run tests
       run: pytest -v tests/ || echo "Tests failed, continuing pipeline"
@@ -36,9 +36,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    
+
+    - name: Force update GitHub Actions
+      run: sudo apt update && sudo apt upgrade -y
+
     - name: Deploy to Render
-      uses: render-oss/deploy-render@v1
+      uses: render-deploy/render-action@v1
       with:
         service-id: ${{ secrets.RENDER_SERVICE_ID }}
         api-key: ${{ secrets.RENDER_API_KEY }}
