@@ -4,9 +4,9 @@ services:
     env: python
     plan: free
     region: frankfurt
-    rootDir: src
+    rootDir: src.app
     buildCommand: pip install -r requirements.txt
-    startCommand: python -m app.bot.py
+    startCommand: python -m bot.py
     healthCheckPath: /health
     envVars:
       - key: DATABASE_URL
